@@ -176,7 +176,7 @@ vSphere Replication performs a sequence of steps to recover replicated virtual m
 
 **Note: Both Source and Target sites are same as VM’s replication is configured for same site.**
 
-**1.  Recover Virtual Machines with vSphere Replication**
+**Recover Virtual Machines with vSphere Replication**
 
 With vSphere Replication, you can recover virtual machines that were successfully replicated at the target site. You can recover one virtual machine at a time.
 
