@@ -121,9 +121,9 @@ Only one vSphere replication appliance can be registered with same vCenter serve
 
 16.	 Review the binding to the vCenter Extension vService and click **Next**
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure12.png)
+     ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure12.png)
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure13.png)
+     ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure13.png)
 
 17.	Power on the vSphere Replication appliance. Take a note of the IP address of the appliance and log out of the vSphere Client
 
@@ -291,7 +291,7 @@ Verify that the virtual machine at the source site is powered off. If the virtua
 -   Click on **Snapshots TAB** > Select the desire snapshot (point in time) and then click **REVERT** button
 
     ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure40.png)
-    
+
 -   Power ON the VM
 -   Wait for 5 mins and then try to access the Red Hat OpenShift Console
 
