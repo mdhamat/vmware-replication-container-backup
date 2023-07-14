@@ -19,7 +19,7 @@ This document provides the steps for replicating the Red Hat OpenShift Virtual M
 
 For this scenario, we use the following versions.
 
--   vSphere Replication 8.2
+-   vSphere Replication 8.3
 -   vCenter Server 6.7.0.31100 Build 13843380
 -   vSphere 6.7. 201906002 build 139812
 
@@ -29,9 +29,9 @@ For this scenario, we use the following versions.
 
 ##  3.	Install Requirements
 
-1.  Download vSphere Replication appliance version 8.2  from VMware 
+1.  Download vSphere Replication appliance version 8.3  from VMware 
 
-    vSphere Replication can be downloaded from your VMware account [HERE](https://customerconnect.vmware.com/downloads/details?productId=742&rPId=33979&downloadGroup=VR820)
+    vSphere Replication can be downloaded from your VMware account [HERE](https://customerconnect.vmware.com/en/downloads/get-download?downloadGroup=VR8315)
 
     ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure2.png)
 
