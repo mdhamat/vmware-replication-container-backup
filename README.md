@@ -141,15 +141,15 @@ To register vSphere Replication appliance in vCenter, Yo need to enter Appliance
 
     **User**: root, **Pass**: the password that was set in the deployment (step 4)
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure15.png)
+    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure15.png)
 
 2.	Go to tab Configuration and add all the information of  vCenter Server
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure16.png)
+    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure16.png)
 
 3.	After that confirm the SSL Certificate from vCenter (meaning that was able to connect to vCenter) to continue
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure17.png)
+    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure17.png)
 
 4.	After VRM service is running and VR is now registered in the vCenter
 
@@ -157,9 +157,7 @@ To register vSphere Replication appliance in vCenter, Yo need to enter Appliance
 
 5.	Next, go back to your vCenter. If you are already logged in, just log out and log in again. Then you should see the information regarding the Plugin for vSphere Replication that was deployed. Refresh your browser so that Site Recovery shortcut is available
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure19.png)
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure20.png)
+    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure19.png)
 
 ##  6.	Assign VRM Administrator Role to User
 
