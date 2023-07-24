@@ -129,7 +129,7 @@ Only one vSphere replication appliance can be registered with same vCenter serve
 
 18.	Power on the vSphere Replication appliance. Take a note of the IP address of the appliance and log out of the vSphere Client
 
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure14.png)
+    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/6b217fdf62923a2c83c0aad73298d81f9fcfcb97/images/Figure14-1.png)
 
 19.	 (Optional) To deploy vSphere Replication on the target site, repeat the same above procedure. This steps is not required for this tutorial but will require for replicating virtual machine between two different site.
 
