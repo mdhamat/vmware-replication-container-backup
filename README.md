@@ -1,308 +1,244 @@
-#   Protecting Container Apps running on VMware Platform using vSphere Replication
+# Installing VMware vSphere Replication to back up and restore Kubernetes workloads
+##  Learn the end-to-end process for installing this backup-and-restore solution
 
-##  1.	Overview
+VMware vSphere® Replication™ is a hypervisor-based, asynchronous
+replication solution for vSphere that you can use for disaster recovery
+and to protect the data on your virtual machines.
 
-This document describes the process of installing and configuring the VMware vSphere replication appliance in VMware vSphere Cluster and configuring the replication of Red Hat OpenShift Cluster that hosts the Container application.
+This tutorial shows you the steps to of install and configure vSphere
+Replication in a VMware vSphere Cluster. You will also configure the
+replication of a Red Hat OpenShift cluster that hosts your container
+application.
 
-vSphere Replication does not have a separate license as it is a feature of certain vSphere license editions.
+## Pros and Cons:
+
+-   Organization can protect their container workload against the
+    infrastructure failure.
+
+-   No Additional license cost or third-party tool is required if you
+    have VMware vSphere infrastructure.
+
+-   VMware vSphere Replication based approach is primarily used for
+    disaster recovery but can also be used for immediate backup for an
+    interim and give some time organization to think and plan for robust
+    container backup solution.
+
+-   VMware vSphere replication doesn't guarantee the consistency of the
+    Red Hat OpenShift cluster and in-memory transactional data as it
+    doesn't have ability on flush the in-memory transactional data onto
+    disk, so container native backup solution is recommended for such
+    requirement.
+
+## Prerequisites
+
+In this tutorial, we use the following software:
+
+-   VMware vSphere Replication 8.3 and above
+-   VMware vCenter Server 6.7 and above
+-   VMware vSphere ESXi 6.7 and above
+
+VMware vSphere Replication does not require a separate license, as it is
+included with different vSphere licenses:
 
 -   vSphere Essentials Plus
 -   vSphere Standard
 -   vSphere Enterprise
 -   vSphere Enterprise Plus
 
-If you have the correct vSphere license, there is no limit on the number of virtual machines that you can replicate by using vSphere Replication.
+If you have an appropriate vSphere license, there is no limit to the
+number of virtual machines that you can replicate using vSphere
+Replication. VMware vSphere Replication can replicate the virtual
+machine on the same vSphere cluster, between two vSphere clusters within
+the same site, and between two different sites.
 
-VMware vSphere Replication can replicate the Virtual Machine on same vSphere Cluster, between two vSphere cluster within the same site and between two different sites as well.
+You can download vSphere Replication 8.3 from VMware. The file is an ISO
+image (that is, no boot is required), so you can mount it in a virtual
+machine or extract it and deploy as a . Then deploy as an OVF file in
+your vCenter Server.
+
+**Note**: If you have an unsupported vCenter or ESXi host, check the
+[vSphere Replication
+matrix](https://interopmatrix.vmware.com/#interop&509=2929) and download
+a supported version.
+
+## High-level architecture
+
+![alt text]https://github.com/mdhamat/vmware-replication-container-backup/blob/d13f7224aa0b425c3a6484a6978de974014a3ff7/images/Figure1.png
+
+## Steps
+
+Only one vSphere Replication appliance can be registered with the same
+vCenter server. In this tutorial, we will protect a Red Hat OpenShift
+virtual machine (VM) within the same site, meaning we only need to
+deploy one vSphere Replication Virtual Appliance.
+
+Follow the public article for the vSphere replication appliance
+installation and configuration in detail -
+[[https://www.bdrsuite.com/blog/vmware-vsphere-replication-8-2-step-by-step/]{.underline}](https://www.bdrsuite.com/blog/vmware-vsphere-replication-8-2-step-by-step/)
+
+Thanks to Author (Luciano Patrao) for publishing this article.
+
+Below is the list of steps for vSphere replication appliance
+installation and configuration:
 
-This document provides the steps for replicating the Red Hat OpenShift Virtual Machine within the same site. 
+### Step 1: Download the vSphere Replication Appliance ([OVF File)](https://customerconnect.vmware.com/en/downloads/get-download?downloadGroup=VR8315)
+
+### Step 2: Deploy the vSphere Replication Virtual Appliance on the source site.
 
-For this scenario, we use the following versions.
+### Step 3: Register the vSphere Replication Appliance with vCenter Server.
+
+### Step 4: Assign VRM Administrator Role to User
 
--   vSphere Replication 8.3
--   vCenter Server 6.7.0.31100 Build 13843380
--   vSphere 6.7. 201906002 build 139812
+> vSphere Replication includes a set of roles, which include privileges
+> that enable users to complete different actions. *VRM Administrator*
+> is the role that includes all vSphere replication privileges.
+>
+> It's a good practice to create a new user to act as the vSphere
+> Replication administrator and then assign the VRM Administrator role
+> to that user.
 
-##  2.  High-Level Architecture Diagram
-
-![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure1.png)
-
-##  3.	Install Requirements
-
-1.  Download vSphere Replication appliance version 8.3  from VMware 
-
-    vSphere Replication can be downloaded from your VMware account [HERE](https://customerconnect.vmware.com/en/downloads/get-download?downloadGroup=VR8315)
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure2.png)
-
-    The file is an ISO (no boot), so you can mount in a VM, or you can extract the ISO. Then deploy as an OVF in your vCenter Server
-
-2.  Supports vCenter Server
-
-    Version 6.7 U2, 6.7 U1, 6.7.0, 6.5 U3, 6.5 U2, 6.5 U1, 6.5.0, 6.0 U3
-
-3.	Supports vSphere ESXi
-
-    Version 6.7 U2, 6.7 U1, 6.7.0, 6.5 U2, 6.5 U1, 6.5.0, 6.0 U3 Supports vSAN 6.7 U2, 6.7 U1, 6.7, 6.6.1 U3, 6.6.1 U2, 6.6.1, 6.6, 6.5
-
-    For unsupported vCenter and ESXi hosts, Check vSphere Replication matrix [HERE](https://interopmatrix.vmware.com/#interop&509=2929) and download the supported version of vSphere Replication appliance. The installation and configuration steps given below remains same
-
-##  4.  Installation Steps
-
-Only one vSphere replication appliance can be registered with same vCenter server. As we are going to protect Red Hat OpenShift Virtual Machine within the same site, we just need to deploy only one vSphere Replication Appliance.
-
-###  Deploy the vSphere Replication Virtual Appliance on Source Site
-
-1.	Log in to the vSphere Client on the source site
-    If you use the HTML5-based vSphere Client to deploy the OVF virtual appliance, on vSphere prior to vSphere 6.7 Update 1, the deployment succeeds, but the vSphere Replication fails to start.
-
-2.	On the home page, select Hosts and Clusters
-
-3.	**Right-click** a host and select **Deploy OVF template**
-
-![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure3.png)
-
-4.	Provide the location of the OVF file from which to deploy the vSphere Replication appliance, and click Next. 
-
-    -   Select URL and provide the URL to deploy the appliance from an online URL. 
-    -   If you downloaded and mounted the vSphere Replication ISO image on a system in your environment, select Local file > Browse and navigate to the \bin directory in the ISO image, and
-
-    To install vSphere Replication appliance (that includes Manager and Server), 
-
-    Select files vSphere_Replication_OVF10.ovf,  vSphere_Replication_OVF10.cert, vSphere_Replication_OVF10.mf, vSphere_Replication-system.vmdk, and vSphere_Replication-support.vmdk files
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure4.png)
-
-5.	Accept the name, select or search for a destination folder or datacenter for the virtual appliance, and click **Next**
-
-    You can enter a new name for the virtual appliance. The name must be unique within each vCenter Server virtual machine folder. 
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure5.png)
-
-6.	Select a cluster, host, or resource pool where you want to run the deployed template, and click **Next**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure6.png)
-
-7.	Review the virtual appliance details and click **Next**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure7.png)
-
-8.	Accept the end-user license agreements (EULA) and click **Next**
-
-9.	Select the number of vCPUs for the virtual appliance and click **Next**
-
-    **Smaller**: VR with **2vCPU** with **8Gb Memory** and **26Gb of Virtual Disk** is sufficient for small environment
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure8.png)
-
-
-10.	Select a destination datastore and disk format for the virtual appliance and click Next
-
-    Encrypting the vSphere Replication appliance VM is not necessary to replicate encrypted VMs with vSphere Replication. 
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure9.png)
-
-11.	Select a network from the list of available networks, set the IP protocol and IP allocation, and click **Next**. 
-
-    vSphere Replication supports both DHCP and static IP addresses. You can also change network settings by using the virtual appliance management interface (VAMI) after installation. 
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure10.png)
-
-12.	On the Customize template page, enter one or more NTP server host names or IP addresse
-
-
-13.	Set the password for the root account that is at least eight characters long and enter the hostname or IP address of at least one NTP server
-
-14.	(Optional) Disable the VCTA service. If you do not want to use vSphere Replication for Disaster Recovery to Cloud, you can reduce the memory consumption by disabling the VCTA service
-
-15.	Click **Next**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure11-1.png)
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure11-2.png)
-
-17.	 Review the binding to the vCenter Extension vService and click **Next**
-
-     ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure12.png)
-
-     ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/3f973ec94863d9306d62fb23011197cdbb9287eb/images/Figure13.png)
-
-18.	Power on the vSphere Replication appliance. Take a note of the IP address of the appliance and log out of the vSphere Client
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/6b217fdf62923a2c83c0aad73298d81f9fcfcb97/images/Figure14-1.png)
-
-19.	 (Optional) To deploy vSphere Replication on the target site, repeat the same above procedure. This steps is not required for this tutorial but will require for replicating virtual machine between two different site.
-
-##  5.	Register vSphere Replication Appliance with vCenter Server
-
-To register vSphere Replication appliance in vCenter, Yo need to enter Appliance VAMI using https://IP-Address:5480
-
-1.	Enter the VAMI with the credentials
-
-    **User**: root, **Pass**: the password that was set in the deployment (step 4)
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure15.png)
-
-2.	Go to tab Configuration and add all the information of  vCenter Server
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure16.png)
-
-3.	After that confirm the SSL Certificate from vCenter (meaning that was able to connect to vCenter) to continue
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure17.png)
-
-4.	After VRM service is running and VR is now registered in the vCenter
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure18.png)
-
-5.	Next, go back to your vCenter. If you are already logged in, just log out and log in again. Then you should see the information regarding the Plugin for vSphere Replication that was deployed. Refresh your browser so that Site Recovery shortcut is available
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/c657d4f7efffaa102c39c3b75dac2a24a8f81ad8/images/Figure19.png)
-
-##  6.	Assign VRM Administrator Role to User
-
-vSphere Replication includes a set of roles. Each role includes a set of privileges, which enable users with those roles to complete different actions. VRM Administrator is one of such roles which incorporate all vSphere replication privileges.
-
-It is a good practice to create a new user for vSphere Replication administrator and assign the VRM administrator role to that user.   
-
-1.  Create a user in vCenter 
-
-    **Logon to** vCenter Server > Click on Menu > **Click** Administration > **Click** Users and Groups from Single Sign On > **Click** ADD
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure21.png)
-
-    Enter **Username, Password**, First Name and Last Name in the Add User window and then **Click ADD**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure22.png)
-
-2.  Assign VRM Administrator role to user in vCenter  
-
-    Select **vCenter** > **Permissions** > Click **ADD** >search for **vrmadmin** (created in Step 1)
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure23.png)
-
-    Select **VRM Administrator** role from the list > Check mark on **“Propagate to children”** option and then Click **OK**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure24.png)
-
-##  7.	Create a vSphere Replication for Virtual Machine (Red Hat OpenShift Cluster)
-
-By default, vCenter Administrator user do not have the privileged to configure VM replication so it is required to create a VRM Administrator user and assign the priviledge.
- 
-1.	Login to vCenter web client using VRM Administrator user “vrmadmin”
-2.	Launch vSphere Replication on the vCenter source by clicking in the shortcut Site Recovery, then click Open Site Recovery:
-
-    It will open vSphere Replication from vCenter
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure25.png)
-
-3.	Next, click the **Replications** tab to open replication area
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure26.png)
-
-4.	Next, click the Replications tab to open replication area and Click New button to add the new VM into Replication
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure27.png)
-
-5.	As we are going to replicate the VM in same site, Target site is the same as source site so just Click Next 
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure28_1.png)
-
-6.	Select Red Hat OpenShift Cluster VM and  Click Next 
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure28_2.png)
-
-7.	Select  the datastore where replica VMs will be saved and click Next
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure28_3.png)
-
-8.	Next is one of the essential sections on our replication process. Here is where we set our **RTO** and **RPO** for SLAs and Disaster Recovery plan.
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure29.png)
-
-9.	Review the configuration and click Finish.
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure30.png)
-
-10.	Red Hat OpenShift VM will appear under replications tab now and replication starts immediately.
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure31.png)
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure32.png)
-
-##  8.	Performing Recovery of Virtual Machine (Red Hat OpenShift Cluster)
-
-vSphere Replication performs a sequence of steps to recover replicated virtual machines:
--   vSphere Replication prepares for the recovery operation.
-    -   If you perform a synchronization of the latest changes, vSphere Replication checks that the source site is available and source virtual machine is powered off before recovering the virtual machine on the target site. Then vSphere Replication synchronizes the changes from the source to the target site. 
-
-    -   If you skip the synchronization and recover with the latest data available, for example, if the source site is not available, vSphere Replication uses the latest available data at the target site. 
-  
--   vSphere Replication rebuilds the replicated .vmdk files. 
--   vSphere Replication reconfigures the newly replicated virtual machine with the correct disk paths. 
--   vSphere Replication registers the virtual machine with vCenter Server at the target site
-
-**Note: Both Source and Target sites are same as VM’s replication is configured for same site.**
-
-**Recover Virtual Machines with vSphere Replication**
-
-With vSphere Replication, you can recover virtual machines that were successfully replicated at the target site. You can recover one virtual machine at a time.
-
-**Prerequisites:**
-
-Verify that the virtual machine at the source site is powered off. If the virtual machine is powered on, an error message reminds you to power it off.
-
-**Procedure:**
-
--   Log in vSphere Web Client or vSphere Client with  **vrmadmin** user 
--   On the home page, click **Site Recovery** and click **Open Site Recovery**. 
--   On the Site Recovery home page,  click **View Details**. 
--   Click the **Replications tab** and select a **VM** that you want to recover
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure33.png)
-
--   Click the **Recover** icon from top
--   Select whether to recover the virtual machine with all the latest data, or to recover the virtual machine with the most recent data available  and then Click **Next**
--   (Optional) Select the Power on the virtual machine after recovery check box.
--   Click **Next**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure34.png)
-
--   Select the **recovery folder** and click **Next**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure35.png)
-
--   Select the **target compute resource** and click **Next**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure36.png)
-
--   Click **Finish**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure37.png)
-
--   Once VM will be restored, its status will change to **Recovered**  
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure38.png)
-
--   Login to **vCenter** with **Administrator** user > **Right Click** on **Recovered VM** (Red Hat OpenShift Cluster) > **Edit Settings** and **click on “Connect”** from Network Adapter 1” and click **OK**
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure39.png)
-
--   Click on **Snapshots TAB** > Select the desire snapshot (point in time) and then click **REVERT** button
-
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/a0caba23347c432eb34035681a01606255c7fc85/images/Figure40.png)
-
--   Power ON the VM
--   Wait for 5 mins and then try to access the Red Hat OpenShift Console
-
-#   Conclusion:
-This tutorial walked you through Installation of VMware vSphere Replication Appliance, Virtual Machine replication configuration for Red Hat OpenShift Cluster VM within the same site and recovering the Red Hat OpenShift Cluster VM from vSphere replication console.
-
-
-    
-
-
-
-
-
-
+1.  To create a user in vCenter, log in to vCenter Server. In the left
+    > menu, click **Administration**. The Administration menu opens.
+
+2.  In the **Single Sign On** section of the menu, click **Users and
+    > Groups**. In the **Users and Groups** panel, click **ADD**. ![alt
+    > text](media/image2.png){width="5.833333333333333in"
+    > height="4.394188538932633in"}
+
+    1.  In the **Add User** window, enter a username and password and
+        first and last name for your administrator. You can optionally
+        add an email address and description. Click **ADD**. ![alt
+        text](media/image3.png){width="4.111887576552931in"
+        height="3.538461286089239in"}
+    2.  To assign the VRM Administrator role to a user in vCenter, in
+        the left menu, select your vCenter and click the **Permissions**
+        tab.
+    3.  Click **ADD** and search for the **vrmadmin** user that you
+        created previously. ![alt
+        text](media/image4.png){width="5.833333333333333in"
+        height="1.251842738407699in"}
+    4.  Click the **VRM Administrator** role from the list and select
+        the **Propagate to children** check box. Click **OK**. ![alt
+        text](media/image5.png){width="4.6713276465441815in"
+        height="3.020978783902012in"}
+
+You have now created a user and assigned them the VRM Administrator
+role.
+
+### Step 5. Create a vSphere Replication for a virtual machine (Red Hat OpenShift Cluster)
+
+The Red Hat OpenShift VM will now appear on the **Replications** tab and
+replications will begin immediately.
+
+![alt text](media/image6.png){width="5.833333333333333in"
+height="2.147998687664042in"}
+
+alt text
+
+![alt text](media/image7.png){width="5.833333333333333in"
+height="1.895832239720035in"}
+
+alt text
+
+### Step 6. Performing a recovery of a virtual machine
+
+vSphere Replication performs the following sequence of steps to recover
+replicated virtual machines:
+
+1.  vSphere Replication prepares for the recovery operation.
+    -   If you perform a synchronization of the latest changes, vSphere
+        Replication checks that the source site is available and source
+        virtual machine is powered off before recovering the virtual
+        machine on the target site. Then vSphere Replication
+        synchronizes the changes from the source to the target site.
+    -   If you skip the synchronization and recover with the latest data
+        available, for example, if the source site is not available,
+        vSphere Replication uses the latest available data at the target
+        site.
+2.  vSphere Replication rebuilds the replicated .vmdk files.
+3.  vSphere Replication reconfigures the newly replicated virtual
+    machine with the correct disk paths.
+4.  vSphere Replication registers the virtual machine with vCenter
+    Server at the target site. **Note**: Both the source and target
+    sites are the same since the VM replication is configured for the
+    same site.
+
+#### Recover a virtual machine with vSphere Replication
+
+With vSphere Replication, you can recover virtual machines that were
+successfully replicated at the target site. You can recover one virtual
+machine at a time.
+
+Before you begin this step, ensure that the virtual machine at the
+source site is powered off. If the virtual machine is powered on, an
+error message will remind you to power it off.
+
+1.  Log in to the vSphere web client or vSphere client as `vrmadmin`.
+
+2.  On the home page, click **Site Recovery** and then click **Open Site
+    Recovery**.
+
+3.  On the Site Recovery page, click **View Details**.
+
+4.  Click the **Replications** tab and select the VM that you want to
+    recover. ![alt text](media/image8.png){width="5.833333333333333in"
+    height="0.8222626859142608in"}
+
+5.  Click **Recover** from the horizontal menu and select whether to
+    recover the virtual machine with all the latest data with the most
+    recent data available. Click **Next**.
+
+6.  **Optional**: Select the **Power on the virtual machine after
+    recovery** check box.
+
+7.  Click **Next**. ![alt
+    text](media/image9.png){width="5.833333333333333in"
+    height="3.5156660104986877in"}
+
+8.  In the Folder window, select a folder for the VM at the recovery
+    site. Click **Next**. ![alt
+    text](media/image10.png){width="5.833333333333333in"
+    height="3.41048009623797in"}
+
+9.  In the Resource window, select the target compute resource at the
+    recovery site. Click **Next**. ![alt
+    text](media/image11.png){width="5.833333333333333in"
+    height="3.3866272965879265in"}
+
+10. On the "Ready to complete" page, review the recovery information
+    that you have entered. If you are satisfied with the settings, click
+    **Finish**. ![alt
+    text](media/image12.png){width="5.833333333333333in"
+    height="3.3894422572178478in"}
+
+11. Review the status of the virtual machine. When it is fully restored,
+    its status will change to **Recovered**.\
+    ![alt text](media/image13.png){width="5.833333333333333in"
+    height="3.0325601487314087in"}
+
+12. Log in to the vCenter as the administrator. Right-click on the
+    recovered VM and click **Edit Settings**.\
+    In the Edit Settings window, in the **Network adapter 1** row,
+    select the **Connect** check box and click **OK**. ![alt
+    text](media/image14.png){width="5.833333333333333in"
+    height="3.0604286964129486in"}
+
+13. Click the **Snapshots** tab in the horizontal menu, select your
+    desired snapshot (that is, the point in time that you want to revert
+    to) and then click **REVERT**. ![alt
+    text](media/image15.png){width="5.833333333333333in"
+    height="2.936045494313211in"}
+
+14. Power on the virtual machine.
+
+15. Wait for 5 mins and then access the Red Hat OpenShift Console.
+
+## Summary
+
+This tutorial walked you through the steps to install VMware vSphere
+Replication Appliance. You configured a virtual machine replication for
+Red Hat OpenShift Cluster within the same site and recovered the Red Hat
+OpenShift Cluster VM from the vSphere Replication console.
+
+To learn more about recovering your workloads ... \[NEED
+CTA/DEMO/PRODUCT PAGE\]
