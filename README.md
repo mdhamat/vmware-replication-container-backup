@@ -63,7 +63,7 @@ a supported version.
 
 ## High-level architecture
 
-![alt text] https://github.com/mdhamat/vmware-replication-container-backup/blob/d13f7224aa0b425c3a6484a6978de974014a3ff7/images/Figure1.png
+![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/d13f7224aa0b425c3a6484a6978de974014a3ff7/images/Figure1.png)
 
 ## Steps
 
