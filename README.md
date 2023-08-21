@@ -89,20 +89,15 @@ installation and configuration:
 
 ### Step 4: Assign VRM Administrator Role to User
 
-> vSphere Replication includes a set of roles, which include privileges
-> that enable users to complete different actions. *VRM Administrator*
-> is the role that includes all vSphere replication privileges.
->
-> It's a good practice to create a new user to act as the vSphere
-> Replication administrator and then assign the VRM Administrator role
-> to that user.
+vSphere Replication includes a set of roles, which include privileges that enable users to complete different actions. VRM Administrator is the role that includes all vSphere replication privileges.
+It’s a good practice to create a new user to act as the vSphere Replication administrator and then assign the VRM Administrator role to that user.
 
 1.  To create a user in vCenter, log in to vCenter Server. In the left
-    > menu, click **Administration**. The Administration menu opens.
+    menu, click **Administration**. The Administration menu opens.
 
 2.  In the **Single Sign On** section of the menu, click **Users and
-    > Groups**. In the **Users and Groups** panel, click **ADD**.
-    >  [alt text]([https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure21.png])
+    Groups**. In the **Users and Groups** panel, click **ADD**.
+    [alt text]([https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure21.png])
 
     1.  In the **Add User** window, enter a username and password and
         first and last name for your administrator. You can optionally
