@@ -102,25 +102,21 @@ installation and configuration:
 
 2.  In the **Single Sign On** section of the menu, click **Users and
     > Groups**. In the **Users and Groups** panel, click **ADD**. ![alt
-    > text]([https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure21.png]){width="5.833333333333333in"
-    > height="4.394188538932633in"}
+    > text]([https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure21.png])
 
     1.  In the **Add User** window, enter a username and password and
         first and last name for your administrator. You can optionally
         add an email address and description. Click **ADD**. ![alt
-        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure22.png){width="4.111887576552931in"
-        height="3.538461286089239in"}
+        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure22.png)
     2.  To assign the VRM Administrator role to a user in vCenter, in
         the left menu, select your vCenter and click the **Permissions**
         tab.
     3.  Click **ADD** and search for the **vrmadmin** user that you
         created previously. ![alt
-        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure23.png){width="5.833333333333333in"
-        height="1.251842738407699in"}
+        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure23.png)
     4.  Click the **VRM Administrator** role from the list and select
         the **Propagate to children** check box. Click **OK**. ![alt
-        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure24.png){width="4.6713276465441815in"
-        height="3.020978783902012in"}
+        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure24.png)
 
 You have now created a user and assigned them the VRM Administrator
 role.
@@ -130,15 +126,11 @@ role.
 The Red Hat OpenShift VM will now appear on the **Replications** tab and
 replications will begin immediately.
 
-![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure31.png){width="5.833333333333333in"
-height="2.147998687664042in"}
+![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure31.png)
 
-alt text
 
-![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure32.png){width="5.833333333333333in"
-height="1.895832239720035in"}
+![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure32.png)
 
-alt text
 
 ### Step 6. Performing a recovery of a virtual machine
 
@@ -181,8 +173,7 @@ error message will remind you to power it off.
 3.  On the Site Recovery page, click **View Details**.
 
 4.  Click the **Replications** tab and select the VM that you want to
-    recover. ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure33.png){width="5.833333333333333in"
-    height="0.8222626859142608in"}
+    recover. ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure33.png)
 
 5.  Click **Recover** from the horizontal menu and select whether to
     recover the virtual machine with all the latest data with the most
@@ -192,42 +183,34 @@ error message will remind you to power it off.
     recovery** check box.
 
 7.  Click **Next**. ![alt
-    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure34.png){width="5.833333333333333in"
-    height="3.5156660104986877in"}
+    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure34.png)
 
 8.  In the Folder window, select a folder for the VM at the recovery
     site. Click **Next**. ![alt
-    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure35.png){width="5.833333333333333in"
-    height="3.41048009623797in"}
+    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure35.png)
 
 9.  In the Resource window, select the target compute resource at the
     recovery site. Click **Next**. ![alt
-    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure36.png){width="5.833333333333333in"
-    height="3.3866272965879265in"}
-
+    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure36.png)
 10. On the "Ready to complete" page, review the recovery information
     that you have entered. If you are satisfied with the settings, click
     **Finish**. ![alt
-    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure37.png){width="5.833333333333333in"
-    height="3.3894422572178478in"}
+    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure37.png)
 
 11. Review the status of the virtual machine. When it is fully restored,
     its status will change to **Recovered**.\
-    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure38.png){width="5.833333333333333in"
-    height="3.0325601487314087in"}
+    ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure38.png)
 
 12. Log in to the vCenter as the administrator. Right-click on the
     recovered VM and click **Edit Settings**.\
     In the Edit Settings window, in the **Network adapter 1** row,
     select the **Connect** check box and click **OK**. ![alt
-    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure39.png){width="5.833333333333333in"
-    height="3.0604286964129486in"}
+    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure39.png)
 
 13. Click the **Snapshots** tab in the horizontal menu, select your
     desired snapshot (that is, the point in time that you want to revert
     to) and then click **REVERT**. ![alt
-    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure40.png){width="5.833333333333333in"
-    height="2.936045494313211in"}
+    text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure40.png)
 
 14. Power on the virtual machine.
 
