@@ -101,7 +101,12 @@ It’s a good practice to create a new user to act as the vSphere Replication ad
 
     1.  In the **Add User** window, enter a username and password and
         first and last name for your administrator. You can optionally
-        add an email address and description. Click **ADD**.![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure22.png)
+        add an email address and description.
+
+        Click **ADD**.
+
+        ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure22.png)
+        
     3.  To assign the VRM Administrator role to a user in vCenter, in
         the left menu, select your vCenter and click the **Permissions**
         tab.
