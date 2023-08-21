@@ -97,7 +97,7 @@ It’s a good practice to create a new user to act as the vSphere Replication ad
 
 2.  In the **Single Sign On** section of the menu, click **Users and
     Groups**. In the **Users and Groups** panel, click **ADD**.
-    [alt text]([https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure21.png])
+    ![alt text]([https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure21.png])
 
     1.  In the **Add User** window, enter a username and password and
         first and last name for your administrator. You can optionally
