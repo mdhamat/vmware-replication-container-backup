@@ -111,11 +111,12 @@ It’s a good practice to create a new user to act as the vSphere Replication ad
         the left menu, select your vCenter and click the **Permissions**
         tab.
     4.  Click **ADD** and search for the **vrmadmin** user that you
-        created previously. ![alt
-        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure23.png)
-    5.  Click the **VRM Administrator** role from the list and select
-        the **Propagate to children** check box. Click **OK**. ![alt
-        text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure24.png)
+        created previously.
+
+        ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure23.png)
+    6.  Click the **VRM Administrator** role from the list and select
+        the **Propagate to children** check box. Click **OK**.
+        ![alt text](https://github.com/mdhamat/vmware-replication-container-backup/blob/f89c713bb5b6a6ef987e0e963c49c888fdd09e8a/images/Figure24.png)
 
 You have now created a user and assigned them the VRM Administrator
 role.
